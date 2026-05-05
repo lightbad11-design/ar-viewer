@@ -2,37 +2,37 @@
   display: none;
 }
 
-html {
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  background: #f5f2ee;
 }
 
 model-viewer {
   width: 100%;
-  height: 90%;
-  background-color: #ffffff;
+  height: 100%;
+  background-color: #f5f2ee;
+  --poster-color: #f5f2ee;
 }
 
-
+/* Progress bar */
 .progress-bar {
   display: block;
-  width: 33%;
-  height: 10%;
-  max-height: 2%;
+  width: 40%;
+  height: 4px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
-  border-radius: 25px;
-  box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.12);
+  overflow: hidden;
 }
 
 .progress-bar.hide {
@@ -41,47 +41,55 @@ model-viewer {
 }
 
 .update-bar {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #2C2319;
   width: 0%;
   height: 100%;
-  border-radius: 25px;
-  float: left;
+  border-radius: 4px;
   transition: width 0.3s;
 }
 
+/* AR Button */
 #ar-button {
-  background-image: url(ar_icon.png);
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  background-position: 12px 50%;
-  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #2C2319;
+  color: #F7F4EF;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  white-space: nowrap;
-  bottom: 16px;
-  padding: 0px 16px 0px 40px;
-  font-family: Roboto Regular, Helvetica Neue, sans-serif;
+  bottom: 24px;
+  padding: 0 20px;
+  height: 44px;
+  border: none;
+  border-radius: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 14px;
-  color:#4285f4;
-  height: 36px;
-  line-height: 36px;
-  border-radius: 18px;
-  border: 1px solid #DADCE0;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(44,35,25,0.25);
+}
+
+#ar-button:hover {
+  background-color: #B85C38;
+  transform: translateX(-50%) translateY(-1px);
 }
 
 #ar-button:active {
-  background-color: #E8EAED;
+  background-color: #1a150f;
+  transform: translateX(-50%) scale(0.98);
 }
 
-#ar-button:focus {
-  outline: none;
+#ar-button img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
 }
 
-#ar-button:focus-visible {
-  outline: 1px solid #4285f4;
-}
-
+/* AR hand prompt */
 @keyframes circle {
   from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
   to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
@@ -95,7 +103,7 @@ model-viewer {
 model-viewer > #ar-prompt {
   position: absolute;
   left: 50%;
-  bottom: 60px;
+  bottom: 80px;
   animation: elongate 2s infinite ease-in-out alternate;
   display: none;
 }
@@ -106,4 +114,6 @@ model-viewer[ar-status="session-started"] > #ar-prompt {
 
 model-viewer > #ar-prompt > img {
   animation: circle 4s linear infinite;
+  width: 48px;
+  height: auto;
 }
